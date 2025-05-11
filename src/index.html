@@ -1,30 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8"/>
-    <script src="webxdc.js"></script>
-  </head>
-  <body>
-    <input id="input" type="text"/>
-    <a href="" onclick="sendMsg(); return false;">Send</a>
-    <p id="output"></p>
-    <hr>
-    <span>selfName:</span><span id="selfName"></span> <br>
-    <span>selfAddr:</span><span id="selfAddr"></span> <br>
-    <script>
-      function sendMsg() {
-        msg = document.getElementById("input").value;
-        window.webxdc.sendUpdate({payload: window.webxdc.selfName+":" + msg, info: "someone typed blah"}, 'Someone typed "'+msg+'".');
-      }
-    
-      function receiveUpdate(update) {
-        console.log(update)
-        document.getElementById('output').innerHTML += update.payload + "<br>";
-      }
-      window.webxdc.setUpdateListener(receiveUpdate, 0);
 
-      document.getElementById('selfName').innerHTML = window.webxdc.selfName;
-      document.getElementById('selfAddr').innerHTML = window.webxdc.selfAddr;
-    </script>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <script src="webxdc.js"></script>
+  <style>
+    #main {
+      margin: 5px 5px;
+    }
+
+    h1 {
+      margin: 5px 0px;
+    }
+
+    h2 {
+      margin: 5px 0px;
+    }
+
+    #no-conference, #conference {
+      border: 1px solid gray;
+      padding: 5px;
+      border-radius: 10px 10px;
+      display: none;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="main">
+    <div id="no-conference">
+      <form  id="create-conference">
+        <h1>Create new Conference</h1>
+        <label for="create-conference-title"></label><input id="create-conference-title" type="text" value="My Conference"><br>
+        <label for="create-conference-start"></label><input id="create-conference-start" type="date" value="2025-05-11"><br>
+        <label for="create-conference-end"></label><input id="create-conference-end" type="date" value="2025-05-15"><br>
+        You can update these values later
+        <button>Create</button>
+      </form>
+    </div>
+    <div id="conference">
+      <h2 id="conference-title"></h2>
+      <span class="conference-start"></span> - <span class="conference-end"></span>
+      <hr>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+
 </html>
