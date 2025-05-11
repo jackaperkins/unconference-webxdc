@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <script src="webxdc.js"></script>
+  </head>
+  <body>
+    <input id="input" type="text"/>
+    <a href="" onclick="sendMsg(); return false;">Send</a>
+    <p id="output"></p>
+    <hr>
+    <span>selfName:</span><span id="selfName"></span> <br>
+    <span>selfAddr:</span><span id="selfAddr"></span> <br>
+    <script>
+      function sendMsg() {
+        msg = document.getElementById("input").value;
+        window.webxdc.sendUpdate({payload: window.webxdc.selfName+":" + msg, info: "someone typed blah"}, 'Someone typed "'+msg+'".');
+      }
+    
+      function receiveUpdate(update) {
+        console.log(update)
+        document.getElementById('output').innerHTML += update.payload + "<br>";
+      }
+      window.webxdc.setUpdateListener(receiveUpdate, 0);
+
+      document.getElementById('selfName').innerHTML = window.webxdc.selfName;
+      document.getElementById('selfAddr').innerHTML = window.webxdc.selfAddr;
+    </script>
+  </body>
+</html>
