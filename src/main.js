@@ -95,4 +95,4 @@ function createConferenceOperation(e) {
 
 document.getElementById('create-conference').addEventListener('submit', createConferenceOperation)
 
-// renderConference()
+renderConference()

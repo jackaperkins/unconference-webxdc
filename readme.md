@@ -18,6 +18,8 @@ Stretch goals:
 ## Tech Approach
 My first draft will be a naive last write wins DB. A simple "create event" message with some required fields will insert one into our localstorage with a UUID. later "update event" messages will update whatever optional fields have been provided.
 
+Probably will use react or something for the frontend, maybe not and reloading the state a window a lot is ok?
+
 ```js
 {
   type: "conference",
