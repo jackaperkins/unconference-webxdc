@@ -1,0 +1,11 @@
+{
+  "name": "unconference-webxdc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webxdc-dev run src"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
