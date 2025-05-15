@@ -1,28 +1,13 @@
 import { ref, computed, toValue, onMounted, reactive } from 'vue'
 import { defineStore } from 'pinia'
 import { watch } from 'vue'
-import { Register } from '../Register'
+import { Register } from '../p2p/register'
+import { Conference } from '@/p2p/operation'
 
 export const useAppStore = defineStore('app', () => {
 
   const xdcExists = ref(false)
 
-  type Operation = {
-    id: string,
-    action: 'create' | 'update' | 'delete',
-    clock: number
-  }
-
-
-
-  type Conference = Operation & {
-    fields: {
-      title: Register<string>,
-      description: Register<string>,
-      start: Register<string>,
-      end: Date
-    }
-  }
 
   const updates = reactive<Array<Conference>>([])
 
