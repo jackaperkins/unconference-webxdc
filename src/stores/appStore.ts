@@ -2,7 +2,7 @@ import { ref, computed, toValue, onMounted, reactive } from 'vue'
 import { defineStore } from 'pinia'
 import { watch } from 'vue'
 import { Register } from '../p2p/register'
-import { Conference } from '@/p2p/operation'
+import { Conference } from '../p2p/operation'
 
 export const useAppStore = defineStore('app', () => {
 
@@ -13,7 +13,7 @@ export const useAppStore = defineStore('app', () => {
 
   onMounted(() => {
 
-    let wakeTimer = null
+    let wakeTimer: number | null |  NodeJS.Timeout= null
 
     if (window.webxdc) {
       setupxdc()

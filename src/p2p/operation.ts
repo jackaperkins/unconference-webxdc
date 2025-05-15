@@ -1,5 +1,6 @@
-import { Register } from "@/p2p/register"
+import { Register } from "../p2p/register"
 import { randomUUID } from 'node:crypto'
+import { RegisterTypes } from "./register"
 
 
 export enum OperationAction {
@@ -32,13 +33,12 @@ export enum AppDataState {
 
 export class AppData {
   id: string
-  clock: number = 1
+  clock: number = 0
   state: AppDataState = AppDataState.PRECREATE
-  fields: Record<string, Register> 
+  fields: Record<string, Register> = {}
 
   constructor() {
     this.id = randomUUID().toString()
-    this.fields = {}
   }
 
   /**
@@ -72,10 +72,11 @@ export class AppData {
     }
 
     // now apply the fields!
+    // we loop our local fields to look them up possibly on the operation
+    // so that we don't introduce new fields described in operation but no in ourself
     for(const[key, value] of Object.entries(this.fields)) {
       if(operation.fields.hasOwnProperty(key)) {
-        // hit
-        // value.
+        value.merge([operation.user, operation.clock, operation.fields[key]])
       }
     }
 
@@ -84,10 +85,11 @@ export class AppData {
 }
 
 export class Conference extends AppData {
-  // fields: {
-  //   title: Register<string>,
-  //   description: Register<string>,
-  //   start: Register<string>,
-  //   end: Date
-  // }
+  constructor() {
+    super()
+    this.fields = {
+      title: new Register(["", 0, ""]),
+      description: new Register(["", 0, ""])
+    }
+  }
 }

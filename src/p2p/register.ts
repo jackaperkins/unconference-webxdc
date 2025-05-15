@@ -1,9 +1,8 @@
 // Learned from https://jakelazaroff.com/words/an-interactive-intro-to-crdts/#last-write-wins-register
 
-type RegisterTypes = string | boolean | number
+export type RegisterTypes = string | boolean | number
 
 export class Register {
-  readonly id: string;
   state: [peer: string, clock: number, value: RegisterTypes];
 
   get value() {
@@ -14,8 +13,7 @@ export class Register {
     return this.state[1]
   }
 
-  constructor(peerId: string, state: [string, number, RegisterTypes]) {
-    this.id = peerId;
+  constructor( state: [string, number, RegisterTypes]) {
     this.state = state;
   }
 
