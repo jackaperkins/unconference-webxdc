@@ -38,6 +38,7 @@ export class AppData {
 
   constructor() {
     this.id = randomUUID().toString()
+    this.fields = {}
   }
 
   /**
@@ -54,13 +55,14 @@ export class AppData {
       return false
     }
 
-    // from here down any return must be true because we've modified state
+    // from here down any return must be true because we've probably modified state
 
+    // keep going even if we dont update the objects clock, individual fields might get updated anyways
     if(operation.clock > this.clock) {
       this.clock = operation.clock
     }
 
-    if((this.state !== AppDataState.DELETED) && operation.action === OperationAction.DELETE) {
+    if(operation.action === OperationAction.DELETE) {
       this.state = AppDataState.DELETED
       return true
     }
@@ -70,6 +72,12 @@ export class AppData {
     }
 
     // now apply the fields!
+    for(const[key, value] of Object.entries(this.fields)) {
+      if(operation.fields.hasOwnProperty(key)) {
+        // hit
+        // value.
+      }
+    }
 
     return true
   }

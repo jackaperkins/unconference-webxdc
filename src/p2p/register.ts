@@ -10,15 +10,19 @@ export class Register {
     return this.state[2];
   }
 
+  get clock() {
+    return this.state[1]
+  }
+
   constructor(peerId: string, state: [string, number, RegisterTypes]) {
     this.id = peerId;
     this.state = state;
   }
 
-  set(value: RegisterTypes) {
-    // set the peer ID to the local ID, increment the local timestamp by 1 and set the value
-    this.state = [this.id, this.state[1] + 1, value];
-  }
+  // set(value: RegisterTypes) {
+  //   // set the peer ID to the local ID, increment the local timestamp by 1 and set the value
+  //   this.state = [this.id, this.state[1] + 1, value];
+  // }
 
   merge(state: [peer: string, clock: number, value: RegisterTypes]) {
     const [remotePeer, remoteClock] = state;
