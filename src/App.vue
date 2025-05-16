@@ -46,12 +46,14 @@ const disableCreate = computed(() => {
           <button :disabled="disableCreate">Create</button>
         </form>
       </div>
-      <div style="font-size: 12px; padding-top:20px; color: #999;">
+      <div v-if="appStore.debug" style="font-size: 12px; padding-top:20px; color: #999;">
         <h3>Updates DB:</h3>
         <div v-for="update of appStore.updates">
           {{ update }}
         </div>
+        <div class="debug-reveal"  @click="appStore.showDebug(false)">Hide Debug</div>
       </div>
+      <div v-else class="debug-reveal" @click="appStore.showDebug(true)">Debug View</div>
     </div>
   </header>
 
@@ -63,6 +65,10 @@ header {
   max-height: 100vh;
 }
 
+.debug-reveal {
+  color: #888;
+  cursor: pointer;
+}
 
 .logo {
   display: block;

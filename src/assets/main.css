@@ -32,3 +32,8 @@ a,
   display: grid;
   grid-template-columns: 1fr 2fr;
 }
+
+hr {
+  height: 1px;
+  border-color: #333;
+}

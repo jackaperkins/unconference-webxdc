@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import CreateEvent from '@/components/CreateEvent.vue'
 import NotFound from '@/views/NotFound.vue'
+import EventFocus from '@/views/EventFocus.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,6 +16,11 @@ const router = createRouter({
       path: '/create/event',
       name: 'createEvent',
       component: CreateEvent
+    },
+    {
+      path: '/event/:id',
+      name: 'eventFocus',
+      component: EventFocus
     },
     {
       path: '/:pathMatch(.*)*',

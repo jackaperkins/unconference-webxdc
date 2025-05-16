@@ -10,21 +10,30 @@ const props = defineProps({
 <template>
   <div class="event-card">
     <h3>
-      {{ event.fields.title.value }}
+      <RouterLink :to="{name: 'eventFocus', params: {id: event.id}}">
+        {{ event.fields.title.value }}
+      </RouterLink>
     </h3>
     <div>
       {{ event.fields.start.value }} - {{ event.fields.end.value }}
     </div>
     <div>
-      Organized by {{ event.fields.organizer.value }}
+      Organized by <span v-if="event.fields.organizer.value">{{ event.fields.organizer.value }}</span><span v-else class="anonymous">Anonymous</span>
     </div>
     <p>
       {{ event.fields.description.value }}
     </p>
   </div>
 </template>
+
 <style scoped>
 .event-card {
-  margin-bottom: 10px;
+  margin-bottom: 25px;
+}
+.anonymous {
+  color: #888;
+}
+p {
+  font-size:18px;
 }
 </style>

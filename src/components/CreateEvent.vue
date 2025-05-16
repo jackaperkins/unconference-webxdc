@@ -12,8 +12,7 @@ const organizer = ref('')
 const start = ref('2025-05-15')
 const end = ref('2025-05-16')
 
-function createEvent(){
-  console.log('creating event')
+function createEvent() {
   appStore.createEvent(
     title.value,
     description.value,

@@ -1,15 +1,22 @@
 import { ref, computed, toValue, onMounted, reactive } from 'vue'
 import { defineStore } from 'pinia'
 import { watch } from 'vue'
-import { Register } from '../p2p/register'
+import { useRoute } from 'vue-router'
 import { AppData, Conference, DataType, Event, Operation, OperationAction } from '../p2p/operation'
 
 export const useAppStore = defineStore('app', () => {
   const user = ref("user1")
   const xdcExists = ref(false)
+  const route = useRoute()
 
   const data = reactive<Array<Conference | Event>>([])
   const updates = reactive<any>([])
+
+  const debug = ref(false)
+
+  function showDebug(newValue: boolean){
+    debug.value = newValue
+  }
 
 
   onMounted(() => {
@@ -114,6 +121,10 @@ export const useAppStore = defineStore('app', () => {
     return data.filter(d => d.dataType === DataType.EVENT)
   })
 
+  const eventFromRouter = computed(() => {
+    return data.find(d => d.id === route.params.id)
+  })
+
   function createEvent(title: string, description: string, organizer: string, start:string, end: string) {
     const appdata = new Event()
     const operation = new Operation(
@@ -125,6 +136,7 @@ export const useAppStore = defineStore('app', () => {
       {
         title,
         description,
+        organizer,
         start,
         end
       }
@@ -132,9 +144,28 @@ export const useAppStore = defineStore('app', () => {
     sendOperation(operation)
   }
 
+  function updateData(dataType: DataType, id: string, fields: {}) {
+    const existing = findData(id)
+    if(!existing){
+      console.error("couldn't find data to update with id", id)
+      return
+    }
+
+    const op = new Operation(
+      id,
+      OperationAction.UPDATE,
+      user.value,
+      existing.clock + 1,
+      dataType,
+      fields
+    )
+
+    sendOperation(op)
+  }
+
   function sendOperation(operation: Operation) {
     window.webxdc.sendUpdate({ payload: operation })
   }
 
-  return { xdcExists, updates, data, conference, createConference, events, createEvent }
+  return { debug, showDebug, xdcExists, updates, data, conference, createConference, events, createEvent, updateData, eventFromRouter }
 })

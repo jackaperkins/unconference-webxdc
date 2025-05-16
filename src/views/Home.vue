@@ -15,15 +15,16 @@ const conference = computed(() => appStore.conference)
         {{ conference.fields.title.value }}
       </h1>
       <h3>{{ conference.fields.start.value }} - {{ conference.fields.end.value }}</h3>
-      <h3>{{ conference.fields.description.value }}</h3>
-      <RouterLink to="/create/event">Create Event</RouterLink>
+      <p>
+        {{ conference.fields.description.value }}
+      </p>
+      <RouterLink to="/create/event">Create Event ➕</RouterLink>
       <br><br>
     </div>
-    <div>
+    <hr>
       <h2>Events</h2>
       <div v-for="event of appStore.events">
         <EventCard :event="event"></EventCard>
       </div>
-    </div>
   </main>
 </template>
