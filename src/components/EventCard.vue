@@ -10,7 +10,7 @@ const props = defineProps({
 <template>
   <div class="event-card">
     <h3>
-      <RouterLink :to="{name: 'eventFocus', params: {id: event.id}}">
+      <RouterLink :to="{ name: 'eventFocus', params: { id: event.id } }">
         {{ event.fields.title.value }}
       </RouterLink>
     </h3>
@@ -18,7 +18,8 @@ const props = defineProps({
       {{ event.fields.start.value }} - {{ event.fields.end.value }}
     </div>
     <div>
-      Organized by <span v-if="event.fields.organizer.value">{{ event.fields.organizer.value }}</span><span v-else class="anonymous">Anonymous</span>
+      Event organized by <span v-if="event.fields.organizer.value">{{ event.fields.organizer.value }}</span><span v-else
+        class="anonymous">Anonymous</span>
     </div>
     <p>
       {{ event.fields.description.value }}
@@ -30,10 +31,12 @@ const props = defineProps({
 .event-card {
   margin-bottom: 25px;
 }
+
 .anonymous {
   color: #888;
 }
+
 p {
-  font-size:18px;
+  font-size: 18px;
 }
 </style>

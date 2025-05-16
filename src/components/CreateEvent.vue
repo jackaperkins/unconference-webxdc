@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useAppStore } from '../stores/appStore';
 import { computed, ref } from 'vue';
-import {  useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 const router = useRouter()
 const appStore = useAppStore()
@@ -9,8 +9,8 @@ const appStore = useAppStore()
 const title = ref('')
 const description = ref('')
 const organizer = ref('')
-const start = ref('2025-05-15')
-const end = ref('2025-05-16')
+const start = ref('2025-05-15T16:00')
+const end = ref('2025-05-15T20:00')
 
 function createEvent() {
   appStore.createEvent(
@@ -24,7 +24,7 @@ function createEvent() {
 }
 
 const disableCreate = computed(() => {
-  if(end.value <= start.value) {
+  if (end.value <= start.value) {
     return "Start time must be before End"
   }
 
@@ -33,21 +33,21 @@ const disableCreate = computed(() => {
 </script>
 <template>
   <main>
-<div>
-    <h2>Create Event</h2>
-    <form @submit.prevent="createEvent">
-      <div class="default-form">
-        <label for="">Title</label><input v-model="title" required>
-        <label for="">Description</label><input v-model="description" required>
-        <label for="">Organizer (you)</label><input v-model="organizer">
-        <label for="">Start</label><input type="datetime-local" v-model="start" required>
-        <label for="">End</label><input type="datetime-local" v-model="end" required>
+    <div>
+      <h2>Create Event</h2>
+      <form @submit.prevent="createEvent">
+        <div class="default-form">
+          <label for="">Title*</label><input v-model="title" required>
+          <label for="">Description*</label><input v-model="description" required>
+          <label for="">Organizer</label><input v-model="organizer">
+          <label for="">Start*</label><input type="datetime-local" v-model="start" required>
+          <label for="">End*</label><input type="datetime-local" v-model="end" required>
+        </div>
+        <button :disabled="disableCreate != null">Create</button>
+      </form>
+      <div v-if="disableCreate">
+        {{ disableCreate }}
       </div>
-      <button :disabled="disableCreate != null">Create</button>
-    </form>
-    <div v-if="disableCreate">
-      {{ disableCreate }}
     </div>
-  </div>
-</main>
+  </main>
 </template>

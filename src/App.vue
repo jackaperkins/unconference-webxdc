@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {  RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import { useAppStore } from './stores/appStore.js'
-import {computed, ref} from 'vue'
+import { computed, ref } from 'vue'
 
 const appStore = useAppStore()
 
@@ -15,11 +15,11 @@ function createConference() {
 }
 
 const disableCreate = computed(() => {
-  if(!confTitle.value || !confDescription.value || !confStart.value || !confEnd.value) {
+  if (!confTitle.value || !confDescription.value || !confStart.value || !confEnd.value) {
     return true
   }
 
-  if(confEnd.value <= confStart.value){
+  if (confEnd.value <= confStart.value) {
     return true
   }
   return false
@@ -46,12 +46,12 @@ const disableCreate = computed(() => {
           <button :disabled="disableCreate">Create</button>
         </form>
       </div>
-      <div v-if="appStore.debug" style="font-size: 12px; padding-top:20px; color: #999;">
+      <div v-if="appStore.debug" style="font-size: 12px; padding-top:30px; color: #999;">
         <h3>Updates DB:</h3>
         <div v-for="update of appStore.updates">
           {{ update }}
         </div>
-        <div class="debug-reveal"  @click="appStore.showDebug(false)">Hide Debug</div>
+        <div class="debug-reveal" @click="appStore.showDebug(false)">Hide Debug</div>
       </div>
       <div v-else class="debug-reveal" @click="appStore.showDebug(true)">Debug View</div>
     </div>
@@ -66,8 +66,9 @@ header {
 }
 
 .debug-reveal {
-  color: #888;
+  color: #555;
   cursor: pointer;
+  margin-top: 50px;
 }
 
 .logo {
