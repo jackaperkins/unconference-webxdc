@@ -2,11 +2,15 @@ import { Register } from "../p2p/register"
 import { randomUUID } from 'node:crypto'
 import { RegisterTypes } from "./register"
 
-
 export enum OperationAction {
   CREATE = 'create',
   UPDATE = 'update',
   DELETE = 'delete'
+}
+
+export enum DataType {
+  CONFERENCE = 'conference',
+  EVENT = 'event'
 }
 
 export class Operation {
@@ -14,13 +18,15 @@ export class Operation {
   action: OperationAction
   user: string
   clock: number
+  dataType:DataType
   fields: Record<string, any> = {}
 
-  constructor( id: string, action: OperationAction, user: string, clock: number, fields: Record<string, string|number|boolean>) {
+  constructor(id: string, action: OperationAction, user: string, clock: number, dataType: DataType , fields: Record<string, string|number|boolean>) {
     this.id = id
     this.action = action
     this.user = user
     this.clock = clock
+    this.dataType = dataType
     this.fields = fields
   }
 }
@@ -36,9 +42,11 @@ export class AppData {
   clock: number = 0
   state: AppDataState = AppDataState.PRECREATE
   fields: Record<string, Register> = {}
+  dataType: DataType
 
-  constructor() {
-    this.id = randomUUID().toString()
+  constructor(dataType: DataType, id?: string) {
+    this.dataType = dataType
+    this.id = id ?? randomUUID().toString()
   }
 
   /**
@@ -85,13 +93,27 @@ export class AppData {
 }
 
 export class Conference extends AppData {
-  constructor() {
-    super()
+  constructor( id?: string) {
+    super(DataType.CONFERENCE, id)
     this.fields = {
       title: new Register(["", 0, ""]),
       description: new Register(["", 0, ""]),
       start: new Register(["", 0, ""]), // date, not date-time
       end: new Register(["", 0, ""]) // date, not date-time
+    }
+  }
+}
+
+
+export class Event extends AppData {
+  constructor(id?: string) {
+    super(DataType.EVENT, id)
+    this.fields = {
+      title: new Register(["", 0, ""]),
+      description: new Register(["", 0, ""]),
+      organizer: new Register(["", 0, ""]),
+      start: new Register(["", 0, ""]), 
+      end: new Register(["", 0, ""])
     }
   }
 }

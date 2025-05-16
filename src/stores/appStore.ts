@@ -8,12 +8,12 @@ export const useAppStore = defineStore('app', () => {
 
   const xdcExists = ref(false)
 
-
-  const updates = reactive<Array<Conference>>([])
+  const data = reactive<Array<Conference|Event>>([])
+  const updates = reactive<Array<Conference|Event>>([])
 
   onMounted(() => {
 
-    let wakeTimer: number | null |  NodeJS.Timeout= null
+    let wakeTimer: number|NodeJS.Timeout = 0
 
     if (window.webxdc) {
       setupxdc()
@@ -41,9 +41,9 @@ export const useAppStore = defineStore('app', () => {
     }, 0)
   }
 
-  function createUpdate(text) {
+  function createUpdate(text:string) {
     window.webxdc.sendUpdate({ payload: text })
   }
 
-  return { xdcExists, updates, createUpdate }
+  return { xdcExists, updates, createUpdate, data }
 })

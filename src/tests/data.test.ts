@@ -1,4 +1,4 @@
-import { AppData, Operation, OperationAction, AppDataState, Conference } from "../p2p/operation";
+import { AppData, Operation, OperationAction, AppDataState, Conference, DataType } from "../p2p/operation";
 import { expect, test } from 'vitest'
 
 // test the  appdata fields can be updated by operations on real data
@@ -14,7 +14,7 @@ test('Conference has default values', () => {
 
 test('Conference has can be initialized', () => {
   const myConf = new Conference()
-  const op = new Operation(myConf.id, OperationAction.CREATE, "alice", 1, {
+  const op = new Operation(myConf.id, OperationAction.CREATE, "alice", 1, DataType.CONFERENCE, {
     title: "demo"
   })
   myConf.applyOperation(op)
@@ -24,13 +24,13 @@ test('Conference has can be initialized', () => {
 
 test('Conference updates only fields later in order', () => {
   const myConf = new Conference()
-  const op = new Operation(myConf.id, OperationAction.CREATE, "alice", 1, {
+  const op = new Operation(myConf.id, OperationAction.CREATE, "alice", 1, DataType.CONFERENCE, {
     title: "demo",
     description: "old description"
   })
   myConf.applyOperation(op)
 
-  const op2 = new Operation(myConf.id, OperationAction.UPDATE, "alice", 2, {
+  const op2 = new Operation(myConf.id, OperationAction.UPDATE, "alice", 2, DataType.CONFERENCE, {
     description: "a demo conference"
   })
   myConf.applyOperation(op2)
@@ -43,12 +43,12 @@ test('Conference updates only fields later in order', () => {
 
 test('Conference updates correctly with out of order updates', () => {
   const myConf = new Conference()
-  const op = new Operation(myConf.id, OperationAction.CREATE, "bob", 1, {
+  const op = new Operation(myConf.id, OperationAction.CREATE, "bob", 1,DataType.CONFERENCE,  {
     title: "demo",
     description: "old description"
   })
   
-  const op2 = new Operation(myConf.id, OperationAction.UPDATE, "alice", 2, {
+  const op2 = new Operation(myConf.id, OperationAction.UPDATE, "alice", 2, DataType.CONFERENCE, {
     description: "a demo conference"
   })
   
