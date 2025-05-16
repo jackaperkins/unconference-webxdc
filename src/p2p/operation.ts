@@ -1,5 +1,5 @@
 import { Register } from "../p2p/register"
-import { randomUUID } from 'node:crypto'
+import { v4 as uuidv4 } from 'uuid';
 import { RegisterTypes } from "./register"
 
 export enum OperationAction {
@@ -46,7 +46,7 @@ export class AppData {
 
   constructor(dataType: DataType, id?: string) {
     this.dataType = dataType
-    this.id = id ?? randomUUID().toString()
+    this.id = id ?? uuidv4().toString()
   }
 
   /**
