@@ -1,6 +1,7 @@
 import { AppData, Operation, OperationAction, AppDataState } from "../p2p/operation";
 import { expect, test } from 'vitest'
 
+// here we test the clock meta-field on the appdata base class
 
 test('AppData starts with clock 0, uncreated state', () => {
   const myData = new AppData()

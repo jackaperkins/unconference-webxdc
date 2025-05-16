@@ -1,6 +1,8 @@
 import { Register } from '../p2p/register'
 import { test, expect } from 'vitest'
 
+// registers store individual fields with a local clock to deal with out-of-order updates
+
 test('Register starts with clock 1', () => {
   const reg = new Register( ["alice", 1, "apples"])
   expect(reg.value).toBe('apples')

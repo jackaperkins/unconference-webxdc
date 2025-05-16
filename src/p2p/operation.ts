@@ -44,10 +44,10 @@ export class AppData {
   /**
    * Apply operation to existing app data
    * @param operation 
-   * @returns True if operation changed data in meaningful way
+   * @returns True if operation changed data in meaningful way, useful for notifying UI states
    */
   applyOperation (operation: Operation): boolean {
-    // early outs, no op
+    // early outs, no operation
     if(operation.id != this.id){
       return false
     }
@@ -89,7 +89,9 @@ export class Conference extends AppData {
     super()
     this.fields = {
       title: new Register(["", 0, ""]),
-      description: new Register(["", 0, ""])
+      description: new Register(["", 0, ""]),
+      start: new Register(["", 0, ""]), // date, not date-time
+      end: new Register(["", 0, ""]) // date, not date-time
     }
   }
 }
