@@ -37,7 +37,7 @@ export const useAppStore = defineStore('app', () => {
     xdcExists.value = true
 
     window.webxdc.setUpdateListener((update) => {
-      console.log('update came in')
+      console.log('update came in', update)
       updates.push(update)
       processOperationFromNetwork(update)
     }, 0)
@@ -45,9 +45,6 @@ export const useAppStore = defineStore('app', () => {
 
   function processOperationFromNetwork(update: { payload: any }) {
     // expect payload to be one of our operations actually
-    console.log('Operation from network:', update)
-    updates.push(update)
-
     const existing = findData(update.payload.id)
 
     if (existing) {
@@ -87,7 +84,7 @@ export const useAppStore = defineStore('app', () => {
   }
 
   const conference = computed(() => {
-    return data.find((d) => d.dataType === DataType.CONFERENCE)
+    return data.find(d => d.dataType === DataType.CONFERENCE)
   })
 
   function createConference(title: string, description: string, start:string, end: string) {
@@ -113,9 +110,31 @@ export const useAppStore = defineStore('app', () => {
     sendOperation(operation)
   }
 
+  const events = computed(() => {
+    return data.filter(d => d.dataType === DataType.EVENT)
+  })
+
+  function createEvent(title: string, description: string, organizer: string, start:string, end: string) {
+    const appdata = new Event()
+    const operation = new Operation(
+      appdata.id,
+      OperationAction.CREATE,
+      user.value,
+      1,
+      DataType.EVENT,
+      {
+        title,
+        description,
+        start,
+        end
+      }
+    )
+    sendOperation(operation)
+  }
+
   function sendOperation(operation: Operation) {
     window.webxdc.sendUpdate({ payload: operation })
   }
 
-  return { xdcExists, updates, data, conference, createConference }
+  return { xdcExists, updates, data, conference, createConference, events, createEvent }
 })

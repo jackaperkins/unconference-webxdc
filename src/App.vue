@@ -46,7 +46,6 @@ const disableCreate = computed(() => {
           <button :disabled="disableCreate">Create</button>
         </form>
       </div>
-
       <div style="font-size: 12px; padding-top:20px; color: #999;">
         <h3>Updates DB:</h3>
         <div v-for="update of appStore.updates">
@@ -64,10 +63,6 @@ header {
   max-height: 100vh;
 }
 
-.default-form {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-}
 
 .logo {
   display: block;
