@@ -32,7 +32,10 @@ const disableCreate = computed(() => {
 
 
 <template>
-  <header>
+  <div v-if="!appStore.xdcExists">
+    <h1>Loading ...</h1>
+  </div>
+  <div v-else>
     <div class="wrapper">
       <div v-if="appStore.conference">
         <RouterView />
@@ -58,8 +61,8 @@ const disableCreate = computed(() => {
       </div>
       <div v-else class="debug-reveal" @click="appStore.showDebug(true)">Debug View</div>
     </div>
-  </header>
 
+  </div>
 </template>
 
 <style scoped>

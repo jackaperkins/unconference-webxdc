@@ -21,7 +21,7 @@ export class Operation {
   dataType: DataType
   fields: Record<string, any> = {}
 
-  constructor(id: string, action: OperationAction, user: string, clock: number, dataType: DataType , fields: Record<string, string|number|boolean>) {
+  constructor(id: string, action: OperationAction, user: string, clock: number, dataType: DataType, fields: Record<string, string | number | boolean>) {
     this.id = id
     this.action = action
     this.user = user
@@ -54,36 +54,36 @@ export class AppData {
    * @param operation 
    * @returns True if operation changed data in meaningful way, useful for notifying UI states
    */
-  applyOperation (operation: Operation): boolean {
+  applyOperation(operation: Operation): boolean {
     // early outs, no operation
-    if(operation.id != this.id){
+    if (operation.id != this.id) {
       return false
     }
-    if(this.state === AppDataState.DELETED) {
+    if (this.state === AppDataState.DELETED) {
       return false
     }
 
     // from here down any return must be true because we've probably modified state
 
     // keep going even if we dont update the objects clock, individual fields might get updated anyways
-    if(operation.clock > this.clock) {
+    if (operation.clock > this.clock) {
       this.clock = operation.clock
     }
 
-    if(operation.action === OperationAction.DELETE) {
+    if (operation.action === OperationAction.DELETE) {
       this.state = AppDataState.DELETED
       return true
     }
 
-    if(this.state === AppDataState.PRECREATE && operation.action === OperationAction.CREATE) {
+    if (this.state === AppDataState.PRECREATE && operation.action === OperationAction.CREATE) {
       this.state = AppDataState.EXISTS
     }
 
     // now apply the fields!
     // we loop our local fields to look them up possibly on the operation
     // so that we don't introduce new fields described in operation but no in ourself
-    for(const[key, value] of Object.entries(this.fields)) {
-      if(operation.fields.hasOwnProperty(key)) {
+    for (const [key, value] of Object.entries(this.fields)) {
+      if (operation.fields.hasOwnProperty(key)) {
         value.merge([operation.user, operation.clock, operation.fields[key]])
       }
     }
@@ -93,7 +93,7 @@ export class AppData {
 }
 
 export class Conference extends AppData {
-  constructor( id?: string) {
+  constructor(id?: string) {
     super(DataType.CONFERENCE, id)
     this.fields = {
       title: new Register(["", 0, ""]),
@@ -112,7 +112,7 @@ export class Event extends AppData {
       title: new Register(["", 0, ""]),
       description: new Register(["", 0, ""]),
       organizer: new Register(["", 0, ""]),
-      start: new Register(["", 0, ""]), 
+      start: new Register(["", 0, ""]),
       end: new Register(["", 0, ""])
     }
   }

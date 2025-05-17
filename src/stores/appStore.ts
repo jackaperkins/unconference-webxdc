@@ -14,10 +14,9 @@ export const useAppStore = defineStore('app', () => {
 
   const debug = ref(false)
 
-  function showDebug(newValue: boolean){
+  function showDebug(newValue: boolean) {
     debug.value = newValue
   }
-
 
   onMounted(() => {
     let wakeTimer: number | NodeJS.Timeout = 0
@@ -42,9 +41,7 @@ export const useAppStore = defineStore('app', () => {
       return
     }
     xdcExists.value = true
-
     window.webxdc.setUpdateListener((update) => {
-      console.log('update came in', update)
       updates.push(update)
       processOperationFromNetwork(update)
     }, 0)
@@ -56,7 +53,6 @@ export const useAppStore = defineStore('app', () => {
 
     if (existing) {
       existing.applyOperation(update.payload)
-      console.log('updating existing data')
       replaceData(existing)
       return
     }
@@ -94,7 +90,7 @@ export const useAppStore = defineStore('app', () => {
     return data.find(d => d.dataType === DataType.CONFERENCE)
   })
 
-  function createConference(title: string, description: string, start:string, end: string) {
+  function createConference(title: string, description: string, start: string, end: string) {
     // prevent multiple conferences
     if (conference.value) {
       return
@@ -125,7 +121,7 @@ export const useAppStore = defineStore('app', () => {
     return data.find(d => d.id === route.params.id)
   })
 
-  function createEvent(title: string, description: string, organizer: string, start:string, end: string) {
+  function createEvent(title: string, description: string, organizer: string, start: string, end: string) {
     const appdata = new Event()
     const operation = new Operation(
       appdata.id,
@@ -146,7 +142,7 @@ export const useAppStore = defineStore('app', () => {
 
   function updateData(dataType: DataType, id: string, fields: {}) {
     const existing = findData(id)
-    if(!existing){
+    if (!existing) {
       console.error("couldn't find data to update with id", id)
       return
     }
