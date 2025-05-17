@@ -10,7 +10,6 @@ const editMode = ref(false)
 
 function onSaved() {
   editMode.value = false
-  window.location.reload()
 }
 
 </script>
