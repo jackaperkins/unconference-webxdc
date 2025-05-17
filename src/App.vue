@@ -36,6 +36,15 @@ const disableCreate = computed(() => {
     <h1>Loading ...</h1>
   </div>
   <div v-else>
+    <div class="nav-bar">
+      <span>
+        <RouterLink :to="{name: 'home'}">
+          <span  class="nav-button" v-if="route.name != 'home'">⮜</span>
+        </RouterLink>
+      </span>
+      <span class="nav-title">{{ route.meta?.title || '' }}</span>
+      <span class="nav-menu"></span>
+    </div>
     <div class="wrapper">
       <div v-if="appStore.conference">
         <RouterView />
@@ -105,6 +114,31 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
+}
+
+.wrapper {
+  padding: 2em;
+}
+
+.nav-bar {
+  background: #586c73;
+  padding: 3px 5px;
+  color: black;
+  background: linear-gradient(180deg, rgb(68, 129, 94) 0%, rgba(87, 199, 133, 1) 100%);
+  display:grid;
+  grid-template-columns: 60px 1fr 60px;
+}
+
+.nav-title {
+  text-align: center;
+  font-weight: bolder;
+  font-size: 18px;
+}
+.nav-button {
+  font-size: 20px;
+  padding: 0px 10px 0px 3px;
+  width:30px;
+  color: black !important;
 }
 
 @media (min-width: 1024px) {

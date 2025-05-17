@@ -10,16 +10,25 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
+      meta: {
+        title: 'Home'
+      },
       component: Home,
     },
     {
       path: '/create/event',
       name: 'createEvent',
+      meta: {
+        title:'Create Event'
+      },
       component: CreateEvent
     },
     {
       path: '/event/:id',
       name: 'eventFocus',
+      meta: {
+        title: 'Event'
+      },
       component: EventFocus
     },
     {
