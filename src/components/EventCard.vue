@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Event } from '../p2p/operation';
+import PrettyEventDate from './PrettyEventDate.vue';
 const props = defineProps({
   event: {
     required: true,
@@ -15,7 +16,7 @@ const props = defineProps({
       </RouterLink>
     </h3>
     <div>
-      {{ event.fields.start.value }} - {{ event.fields.end.value }}
+      <PrettyEventDate :start="event.fields.start.value" :end="event.fields.end.value"/>
     </div>
     <div>
       Organized by <span v-if="event.fields.organizer.value">{{ event.fields.organizer.value }}</span><span v-else
