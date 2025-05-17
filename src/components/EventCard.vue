@@ -18,7 +18,7 @@ const props = defineProps({
       {{ event.fields.start.value }} - {{ event.fields.end.value }}
     </div>
     <div>
-      Event organized by <span v-if="event.fields.organizer.value">{{ event.fields.organizer.value }}</span><span v-else
+      Organized by <span v-if="event.fields.organizer.value">{{ event.fields.organizer.value }}</span><span v-else
         class="anonymous">Anonymous</span>
     </div>
     <p>
@@ -37,6 +37,6 @@ const props = defineProps({
 }
 
 p {
-  font-size: 18px;
+  font-size: 17px;
 }
 </style>

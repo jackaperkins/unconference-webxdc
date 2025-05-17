@@ -61,3 +61,7 @@ Probably will use react or something for the frontend, maybe not and reloading t
 - Timezones suck, lets skip this for now and assume unconferences happen in an obvious shared context. Version 2 can have a default timezone for the conference as a whole and give users a toggle to go between their own and the conference's.
 - Some level of permissions might be desirable. Or at least if someone deleted your event it'd be nice to have a notification?
 - Updating the conference dates might leave events outside the acceptible range. We'd need a way of still seeing these without advertizing them so directly.
+
+
+### TODO
+- make sparse field updates only based on copy of data we had when we started editing, so we dont clobber updates from peers that happened while we were typing

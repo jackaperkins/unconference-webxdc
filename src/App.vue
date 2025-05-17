@@ -2,6 +2,9 @@
 import { RouterView } from 'vue-router'
 import { useAppStore } from './stores/appStore.js'
 import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 
 const appStore = useAppStore()
 
@@ -48,7 +51,7 @@ const disableCreate = computed(() => {
       </div>
       <div v-if="appStore.debug" style="font-size: 12px; padding-top:30px; color: #999;">
         <h3>Updates DB:</h3>
-        <div v-for="update of appStore.updates">
+        <div v-for="update of appStore.updates" :key="update.sequence">
           {{ update }}
         </div>
         <div class="debug-reveal" @click="appStore.showDebug(false)">Hide Debug</div>
@@ -113,12 +116,7 @@ nav a:first-of-type {
   }
 
   nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.1);
   }
 }
 </style>

@@ -18,7 +18,7 @@ export class Operation {
   action: OperationAction
   user: string
   clock: number
-  dataType:DataType
+  dataType: DataType
   fields: Record<string, any> = {}
 
   constructor(id: string, action: OperationAction, user: string, clock: number, dataType: DataType , fields: Record<string, string|number|boolean>) {

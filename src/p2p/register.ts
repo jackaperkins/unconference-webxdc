@@ -13,14 +13,9 @@ export class Register {
     return this.state[1]
   }
 
-  constructor( state: [string, number, RegisterTypes]) {
+  constructor(state: [string, number, RegisterTypes]) {
     this.state = state;
   }
-
-  // set(value: RegisterTypes) {
-  //   // set the peer ID to the local ID, increment the local timestamp by 1 and set the value
-  //   this.state = [this.id, this.state[1] + 1, value];
-  // }
 
   merge(state: [peer: string, clock: number, value: RegisterTypes]) {
     const [remotePeer, remoteClock] = state;
