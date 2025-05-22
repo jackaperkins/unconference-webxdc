@@ -27,6 +27,6 @@ const conference = computed(() => appStore.conference)
       <div v-for="event of appStore.events" :key="event.id">
         <EventCard :event="event"></EventCard>
       </div>
-      <div v-if="appStore.events.length ===0">No Events</div>
+      <div v-if="appStore.events.length === 0">No Events</div>
   </main>
 </template>

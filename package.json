@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
+    "package": "vite build && (cd dist && zip -9 --recurse-paths - *) > myapp.xdc",
     "preview": "vite preview",
     "lint": "eslint . --fix",
     "xdc": "webxdc-dev run  http://localhost:3000",
@@ -28,6 +29,7 @@
     "globals": "^16.0.0",
     "vite": "^6.2.4",
     "vite-plugin-vue-devtools": "^7.7.2",
-    "vitest": "^3.1.3"
+    "vitest": "^3.1.3",
+    "webxdc-types": "^1.0.1"
   }
 }

@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { AppData, Conference, DataType, Event, Operation, OperationAction } from '../p2p/operation'
+import "webxdc-types/global";
 
 export const useAppStore = defineStore('app', () => {
   const user = ref("user1")
@@ -41,7 +42,7 @@ export const useAppStore = defineStore('app', () => {
       return
     }
     xdcExists.value = true
-    window.webxdc.setUpdateListener((update) => {
+    window.webxdc.setUpdateListener(update => {
       updates.push(update)
       processOperationFromNetwork(update)
     }, 0)
@@ -160,7 +161,7 @@ export const useAppStore = defineStore('app', () => {
   }
 
   function sendOperation(operation: Operation) {
-    window.webxdc.sendUpdate({ payload: operation })
+    window.webxdc.sendUpdate({ payload: operation }, "calendar update")
   }
 
   return { debug, showDebug, xdcExists, updates, data, conference, createConference, events, createEvent, updateData, eventFromRouter }

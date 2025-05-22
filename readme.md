@@ -21,6 +21,7 @@ My first draft will be a naive last write wins DB. A simple "create event" messa
 Probably will use react or something for the frontend, maybe not and reloading the state a window a lot is ok?
 
 ```js
+// OPERATIONS
 {
   type: "conference",
   action: "create",
