@@ -64,5 +64,14 @@ Probably will use react or something for the frontend, maybe not and reloading t
 - Updating the conference dates might leave events outside the acceptible range. We'd need a way of still seeing these without advertizing them so directly.
 
 
-### TODO
-- make sparse field updates only based on copy of data we had when we started editing, so we dont clobber updates from peers that happened while we were typing
+### Progress Checklist
+
+[x] - Vue frontend
+[x] - Wrap webxdc connection in vue store
+[x] - Core operation CRDTs
+[x] - Conference and Event types, operations
+[ ] - Event deletion
+[ ] - Add localstorage logic to appstore, resume update listening from last sequence 
+[ ] - Day-by-day view, deep links for chat from creation events
+[ ] - Decide on themining and dump placeholder CSS
+[ ] - Attendence type, for marking interest in a specific event
