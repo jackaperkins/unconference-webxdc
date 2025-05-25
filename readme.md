@@ -66,12 +66,12 @@ Probably will use react or something for the frontend, maybe not and reloading t
 
 ### Progress Checklist
 
-[x] - Vue frontend
-[x] - Wrap webxdc connection in vue store
-[x] - Core operation CRDTs
-[x] - Conference and Event types, operations
-[ ] - Event deletion
-[ ] - Add localstorage logic to appstore, resume update listening from last sequence 
-[ ] - Day-by-day view, deep links for chat from creation events
-[ ] - Decide on themining and dump placeholder CSS
-[ ] - Attendence type, for marking interest in a specific event
+- [x] Vue frontend
+- [x] Wrap webxdc connection in vue store
+- [x] Core operation CRDTs
+- [x] Conference and Event types, operations
+- [ ] Event deletion
+- [ ] Add localstorage logic to appstore, resume update listening from last sequence 
+- [ ] Day-by-day view, deep links for chat from creation events
+- [ ] Decide on themining and dump placeholder CSS
+- [ ] Attendence type, for marking interest in a specific event
