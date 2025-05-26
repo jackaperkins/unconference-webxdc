@@ -20,8 +20,7 @@ const conference = computed(() => appStore.conference)
       <p>
         {{ conference.fields.description.value }}
       </p>
-      <RouterLink to="/create/event">Create Event +</RouterLink>
-      <br><br>
+      <RouterLink to="/create/event" class="link-button">Create Event +</RouterLink>
     </div>
       <h2>Events</h2>
       <div v-for="event of appStore.events" :key="event.id">

@@ -34,7 +34,6 @@ const disableCreate = computed(() => {
 <template>
   <main>
     <div>
-      <h2>Create Event</h2>
       <form @submit.prevent="createEvent">
         <div class="default-form">
           <label for="">Title*</label><input v-model="title" required>

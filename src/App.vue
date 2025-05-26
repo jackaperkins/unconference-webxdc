@@ -39,7 +39,7 @@ const disableCreate = computed(() => {
     <div class="nav-bar">
       <span>
         <RouterLink :to="{name: 'home'}">
-          <span  class="nav-button" v-if="route.name != 'home'">⮜</span>
+          <span  class="nav-button" v-if="route.name != 'home'">Back</span>
         </RouterLink>
       </span>
       <span class="nav-title">{{ route.meta?.title || '' }}</span>
@@ -123,8 +123,8 @@ nav a:first-of-type {
 .nav-bar {
   background: #586c73;
   padding: 3px 5px;
-  color: black;
-  background: linear-gradient(180deg, rgb(68, 129, 94) 0%, rgba(87, 199, 133, 1) 100%);
+  color: var(--color-text);
+  background-color: var(--color-background-mute);
   display:grid;
   grid-template-columns: 60px 1fr 60px;
 }
@@ -135,10 +135,10 @@ nav a:first-of-type {
   font-size: 18px;
 }
 .nav-button {
-  font-size: 20px;
+  font-size: 16px;
   padding: 0px 10px 0px 3px;
   width:30px;
-  color: black !important;
+  color: var(--color-heading);
 }
 
 @media (min-width: 1024px) {

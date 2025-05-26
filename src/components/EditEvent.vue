@@ -11,7 +11,7 @@ const props = defineProps({
 })
 
 let editingCopy: Record<string, string | number | boolean> = {}
-const emit = defineEmits(['saved'])
+const emit = defineEmits(['close'])
 
 const appStore = useAppStore()
 
@@ -48,9 +48,9 @@ function updateEvent() {
     start: start.value != editingCopy.start ? start.value : undefined,
     end: end.value != editingCopy.end ? end.value : undefined
   }
-  
-  if(Object.values(finalUpdate).find(v => v != undefined) === undefined) {
-    emit('saved')
+
+  if (Object.values(finalUpdate).find(v => v != undefined) === undefined) {
+    emit('close')
     return
   }
 
@@ -62,7 +62,7 @@ function updateEvent() {
     finalUpdate
   )
 
-  emit('saved')
+  emit('close')
 }
 
 const disableCreate = computed(() => {
@@ -86,6 +86,7 @@ const disableCreate = computed(() => {
           <label for=""> End </label><input type="datetime-local" v-model="end" required>
         </div>
         <button :disabled="disableCreate != null">Update</button>
+        <button @click="emit('close')">Cancel</button>
       </form>
       <div v-if="disableCreate">
         {{ disableCreate }}

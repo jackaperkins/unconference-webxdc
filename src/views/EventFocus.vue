@@ -8,7 +8,7 @@ const appStore = useAppStore()
 
 const editMode = ref(false)
 
-function onSaved() {
+function close() {
   editMode.value = false
 }
 
@@ -20,8 +20,7 @@ function onSaved() {
       <button @click="editMode = !editMode">Edit</button>
     </div>
     <div v-else>
-      <EditEvent :event="appStore.eventFromRouter" @saved="onSaved"/>
-      <button @click="editMode = !editMode">Cancel</button>
+      <EditEvent :event="appStore.eventFromRouter" @close="close"/>
     </div>
   </div>
   <div v-else>Cannot find event</div>

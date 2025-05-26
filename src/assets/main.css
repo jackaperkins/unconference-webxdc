@@ -39,3 +39,22 @@ hr {
   height: 1px;
   border-color: #333;
 }
+
+button {
+  border-radius: none;
+  border: none;
+  color: var(--color-heading);
+  background-color: var(--color-background-mute);
+  font-weight: bolder;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.link-button {
+  border-radius: none;
+  border: none;
+  color: var(--color-heading);
+  background-color: var(--color-background-mute);
+  font-weight: bolder;
+  padding: 5px 10px;
+}
