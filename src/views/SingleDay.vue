@@ -3,14 +3,14 @@ import { useAppStore } from '@/stores/appStore';
 import EventCard from '@/components/EventCard.vue';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { yearMonthDay, offsetDay } from '../lib';
+import { yearMonthDay, offsetDay, sameDay, eventOverlapsToday } from '../lib';
 
 const route = useRoute()
 const appStore = useAppStore()
 
 const conference = computed(() => appStore.conference)
 
-const todayDate: Date | null = computed(() => {
+const todayDate = computed(() => {
     if (route.params.day) {
         return new Date(route.params.day) || null
     }
@@ -21,7 +21,7 @@ const previousDay: Date | null = computed(() => offsetDay(todayDate.value, -1))
 const nextDay: Date | null = computed(() => offsetDay(todayDate.value, 1))
 
 const events = computed(() => {
-    return appStore.events
+    return appStore.events.filter(event => eventOverlapsToday(todayDate.value, event))
 })
 
 function getDayName(theDate) {
@@ -39,24 +39,27 @@ function getDayName(theDate) {
     <main>
         <div v-if="conference">
             <div class="previous-next">
-                <span >
-                    <RouterLink v-if="previousDay" :to="`/day/${yearMonthDay(previousDay)}`">{{ getDayName(previousDay) }}</RouterLink>
+                <span>
+                    <RouterLink v-if="previousDay" :to="`/day/${yearMonthDay(previousDay)}`">
+                        {{ getDayName(previousDay) }}
+                    </RouterLink>
                 </span>
                 <span>
-                        <RouterLink v-if="nextDay" :to="`/day/${yearMonthDay(nextDay)}`">{{ getDayName(nextDay) }}</RouterLink>
-              
+                    <RouterLink v-if="nextDay" :to="`/day/${yearMonthDay(nextDay)}`">
+                        {{ getDayName(nextDay) }}
+                    </RouterLink>
                 </span>
-            </div>  
+            </div>
         </div>
         <div v-for="event of events" :key="event.id">
-            <EventCard :event="event"></EventCard>
+            <EventCard :event="event" :short="true"></EventCard>
         </div>
         <div v-if="appStore.events.length === 0">No Events Today</div>
     </main>
 </template>
 
 <style scoped>
-    .previous-next * {
-        padding: 0px 10px;
-    }
+.previous-next * {
+    padding: 0px 10px;
+}
 </style>

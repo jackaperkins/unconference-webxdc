@@ -98,8 +98,11 @@ nav {
   margin-top: 2rem;
 }
 
+
+
 nav a.router-link-exact-active {
   color: var(--color-text);
+  background-color: transparent;
 }
 
 nav a.router-link-exact-active:hover {
@@ -110,6 +113,7 @@ nav a {
   display: inline-block;
   padding: 0 1rem;
   border-left: 1px solid var(--color-border);
+  background-color: transparent;
 }
 
 nav a:first-of-type {

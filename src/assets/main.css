@@ -12,8 +12,10 @@ a,
 .green {
   text-decoration: none;
   color: hsla(160, 100%, 37%, 1);
+  background-color: hsla(160, 100%, 37%, 0.1);
   padding: 3px;
 }
+
 
 @media (hover: hover) {
   a:hover {
@@ -57,4 +59,15 @@ button {
   background-color: var(--color-background-mute);
   font-weight: bolder;
   padding: 5px 10px;
+}
+
+button:disabled {
+  background-color: var(--color-background-soft);
+}
+
+input, textarea {
+  background-color: var(--color-background-mute);
+  color: var(--color-text);
+  border: none;
+  /* border: 1px solid var(--color-heading); */
 }

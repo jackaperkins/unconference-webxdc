@@ -79,14 +79,16 @@ const disableCreate = computed(() => {
       <h3>Edit Event</h3>
       <form @submit.prevent.stop="updateEvent">
         <div class="default-form">
-          <label for=""> Title </label><input v-model="title" required>
-          <label for=""> Description </label><input v-model="description" required>
+          <label for=""> Title* </label><input v-model="title" required>
+          <label for=""> Description* </label><textarea v-model="description"></textarea>
           <label for=""> Organizer</label><input v-model="organizer">
           <label for=""> Start </label><input type="datetime-local" v-model="start" required>
           <label for=""> End </label><input type="datetime-local" v-model="end" required>
         </div>
-        <button :disabled="disableCreate != null">Update</button>
-        <button @click="emit('close')">Cancel</button>
+        <div class="button-group">
+          <button @click.prevent="emit('close')">Cancel</button>
+          <button :disabled="disableCreate != null">Update</button>
+        </div>
       </form>
       <div v-if="disableCreate">
         {{ disableCreate }}
@@ -94,3 +96,13 @@ const disableCreate = computed(() => {
     </div>
   </main>
 </template>
+
+<style scoped>
+.button-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  max-width: 350px;
+  margin-top: 10px;
+}
+</style>

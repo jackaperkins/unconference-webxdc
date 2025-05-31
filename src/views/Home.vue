@@ -20,12 +20,15 @@ const conference = computed(() => appStore.conference)
       <p>
         {{ conference.fields.description.value }}
       </p>
+      <br>
       <RouterLink to="/create/event" class="link-button">Create Event +</RouterLink>
     </div>
-      <h2>Events</h2>
-      <div v-for="event of appStore.events" :key="event.id">
-        <EventCard :event="event"></EventCard>
-      </div>
-      <div v-if="appStore.events.length === 0">No Events</div>
+    <br>
+    <br>
+    <h2>Events</h2>
+    <div v-for="event of appStore.events" :key="event.id">
+      <EventCard :event="event" :short="true"></EventCard>
+    </div>
+    <div v-if="appStore.events.length === 0">No Events</div>
   </main>
 </template>
