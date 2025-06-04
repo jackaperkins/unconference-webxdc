@@ -44,6 +44,10 @@ const description = computed(() => {
 </template>
 
 <style scoped>
+h3 {
+  margin-bottom: 5px;
+}
+
 .event-card {
   margin-bottom: 25px;
 }
@@ -54,6 +58,7 @@ p {
 }
 
 .meta {
+  line-height: 100%;
   color: var(--color-hint);
 }
 </style>

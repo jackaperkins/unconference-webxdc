@@ -36,11 +36,16 @@ const disableCreate = computed(() => {
     <div>
       <form @submit.prevent="createEvent">
         <div class="default-form">
-          <label for="">Title*</label><input v-model="title" required>
-          <label for="">Description*</label><textarea v-model="description"></textarea>
-          <label for="">Organizer</label><input v-model="organizer">
-          <label for="">Start*</label><input type="datetime-local" v-model="start" required>
-          <label for="">End*</label><input type="datetime-local" v-model="end" required>
+          <label for="">Title*</label><br>
+          <input v-model="title" required><br>
+          <label for="">Description</label><br>
+          <textarea v-model="description"></textarea><br>
+          <label for="">Organizer</label><br>
+          <input v-model="organizer"><br>
+          <label for="">Start*</label><br>
+          <input type="datetime-local" v-model="start" required><br>
+          <label for="">End*</label><br>
+          <input type="datetime-local" v-model="end" required>
         </div>
         <button :disabled="disableCreate != null">Create</button>
       </form>

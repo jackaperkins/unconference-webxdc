@@ -2,7 +2,7 @@ import { ref, computed, toValue, onMounted, reactive } from 'vue'
 import { defineStore } from 'pinia'
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { AppData, Conference, DataType, Event, Operation, OperationAction } from '../p2p/operation'
+import { AppData, AppDataState, Conference, DataType, Event, Operation, OperationAction } from '../p2p/operation'
 import "webxdc-types/global";
 
 export const useAppStore = defineStore('app', () => {
@@ -115,7 +115,7 @@ export const useAppStore = defineStore('app', () => {
   }
 
   const events = computed(() => {
-    return data.filter(d => d.dataType === DataType.EVENT)
+    return data.filter(d => d.dataType === DataType.EVENT && d.state === AppDataState.EXISTS)
   })
 
   const eventFromRouter = computed(() => {
@@ -141,6 +141,26 @@ export const useAppStore = defineStore('app', () => {
     sendOperation(operation)
   }
 
+  function deleteDate(dataType: DataType, id: string) {
+    const existing = findData(id)
+    if (!existing) {
+      console.error("couldn't find data to update with id", id)
+      return
+    }
+
+    const op = new Operation(
+      id,
+      OperationAction.DELETE,
+      user.value,
+      existing.clock + 1,
+      dataType,
+      {}
+    )
+
+    sendOperation(op)
+
+  }
+
   function updateData(dataType: DataType, id: string, fields: {}) {
     const existing = findData(id)
     if (!existing) {
@@ -164,5 +184,18 @@ export const useAppStore = defineStore('app', () => {
     window.webxdc.sendUpdate({ payload: operation }, "calendar update")
   }
 
-  return { debug, showDebug, xdcExists, updates, data, conference, createConference, events, createEvent, updateData, eventFromRouter }
+  return {
+    debug,
+    showDebug,
+    xdcExists,
+    updates,
+    data,
+    conference,
+    createConference,
+    events,
+    createEvent,
+    updateData,
+    deleteDate,
+    eventFromRouter
+  }
 })

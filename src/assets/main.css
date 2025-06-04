@@ -31,10 +31,18 @@ a,
 
 }
 
-.default-form {
+.button-group {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 5px
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  max-width: 350px;
+  margin-top: 10px;
+}
+
+.default-form input, .default-form textarea {
+  width: 100%;
+  min-height: 25px;
+  margin-bottom: 10px;
 }
 
 hr {
@@ -65,9 +73,14 @@ button:disabled {
   background-color: var(--color-background-soft);
 }
 
-input, textarea {
+input,
+textarea {
   background-color: var(--color-background-mute);
   color: var(--color-text);
   border: none;
   /* border: 1px solid var(--color-heading); */
+}
+
+button.red {
+  background-color: rgba(255, 0, 0, 0.2);
 }

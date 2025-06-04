@@ -53,20 +53,27 @@ const disableCreate = computed(() => {
         <h2>New Conference</h2>
         <form @submit.prevent="createConference">
           <div class="default-form">
-            <label for="">Title</label><input v-model="confTitle">
-            <label for="">Description</label><input v-model="confDescription">
-            <label for="">Start</label><input type="date" v-model="confStart">
-            <label for="">End</label><input type="date" v-model="confEnd">
+            <label for="">Title</label><br>
+            <input v-model="confTitle"><br>
+            <label for="">Description</label><br>
+            <input v-model="confDescription"><br>
+            <label for="">Start</label><br>
+            <input type="date" v-model="confStart"><br>
+            <label for="">End</label><br>
+            <input type="date" v-model="confEnd">
           </div>
           <button :disabled="disableCreate">Create</button>
         </form>
       </div>
+      <br>
+      <br>
+      <br>
       <div v-if="appStore.debug" style="font-size: 12px; padding-top:30px; color: #999;">
+        <div class="debug-reveal" @click="appStore.showDebug(false)">Hide Debug</div>
         <h3>Updates DB:</h3>
-        <div v-for="update of appStore.updates" :key="update.sequence">
+        <div v-for="update of appStore.updates" :key="update.sequence" style="margin-bottom: 10px;">
           {{ update }}
         </div>
-        <div class="debug-reveal" @click="appStore.showDebug(false)">Hide Debug</div>
       </div>
       <div v-else class="debug-reveal" @click="appStore.showDebug(true)">Debug View</div>
     </div>
