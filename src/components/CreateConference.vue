@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useAppStore } from '../stores/appStore'
+import { yearMonthDay } from '@/lib';
 
 const appStore = useAppStore();
 
 const title = ref('My Conference')
 const description = ref('An unconference for everyone')
-const start = ref('2025-05-10')
-const end = ref('2025-05-20')
+const start = ref(yearMonthDay(new Date()))
+const end = ref(yearMonthDay(new Date()))
 
 function createConference() {
   appStore.createConference(title.value, description.value, start.value.toString(), end.value.toString())

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useAppStore } from '@/stores/appStore';
 import EventCard from '@/components/EventCard.vue';
-import { computed } from 'vue';
+import { compile, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { yearMonthDay, offsetDay, sameDay, eventOverlapsToday, dayAndDayName } from '../lib';
+import { yearMonthDay, offsetDay, eventOverlapsToday, dayAndDayName } from '../lib';
 
 const route = useRoute()
 const appStore = useAppStore()
@@ -17,6 +17,14 @@ const todayDate = computed(() => {
     return null
 })
 
+const withinConference = computed(() => {
+    if (!todayDate.value || !conference.value) {
+        return false
+    }
+
+    const today = yearMonthDay(todayDate.value)
+    return (today != null && today >= conference.value.fields.start.value && today <= conference.value.fields.end.value)
+})
 const previousDay: Date | null = computed(() => offsetDay(todayDate.value, -1))
 const nextDay: Date | null = computed(() => offsetDay(todayDate.value, 1))
 
@@ -28,35 +36,57 @@ const events = computed(() => {
 </script>
 
 <template>
-    <header>
-        <h1>
-            {{ getDayName(todayDate) }}
-        </h1>
-    </header>
     <main>
-        <div v-if="conference">
-            <div class="previous-next">
-                <span>
-                    <RouterLink v-if="previousDay" :to="`/day/${yearMonthDay(previousDay)}`">
-                        {{ getDayName(previousDay) }}
-                    </RouterLink>
-                </span>
-                <span>
-                    <RouterLink v-if="nextDay" :to="`/day/${yearMonthDay(nextDay)}`">
-                        {{ getDayName(nextDay) }}
-                    </RouterLink>
-                </span>
+        <div v-if="conference" class="header-nav">
+            <div>
+                <RouterLink :to="`/day/${yearMonthDay(previousDay)}`">
+                    <img class="svg-icon" src="/public/arrow-left-svgrepo-com.svg">
+                </RouterLink>
+            </div>
+            <h2>
+                {{ dayAndDayName(todayDate) }}
+            </h2>
+            <div>
+                <RouterLink :to="`/day/${yearMonthDay(nextDay)}`">
+                    <img class="svg-icon" src="/public/arrow-right-svgrepo-com.svg">
+                </RouterLink>
             </div>
         </div>
-        <div v-for="event of events" :key="event.id">
-            <EventCard :event="event" :short="true"></EventCard>
+        <div v-if="conference">
+            <div v-if="!withinConference">
+                <br>
+                <p>
+                    Date outside of conference start and end.
+                </p>
+                <br>
+                <p>
+                    Go to <RouterLink :to="'/day/' + yearMonthDay(conference.fields.start.value)">First Day</RouterLink>
+                </p>
+            </div>
+            <div v-else>
+                <div v-for="event of events" :key="event.id">
+                    <EventCard :event="event" :short="true"></EventCard>
+                </div>
+                <div v-if="appStore.events.length === 0">
+                    <p>
+                        No Events Today
+                    </p>
+                    <br>
+                    <br>
+                    <RouterLink to="/create/event" class="link-button">Create Event +</RouterLink>
+                </div>
+            </div>
         </div>
-        <div v-if="appStore.events.length === 0">No Events Today</div>
     </main>
 </template>
 
 <style scoped>
-.previous-next * {
-    padding: 0px 10px;
+.header-nav {
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    text-align: center;
+}
+.header-nav a {
+    background: none !important;
 }
 </style>

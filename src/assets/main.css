@@ -31,6 +31,10 @@ a,
 
 }
 
+img.svg-icon {
+  width: 24px;
+}
+
 .button-group {
   display: grid;
   grid-template-columns: 1fr 1fr;

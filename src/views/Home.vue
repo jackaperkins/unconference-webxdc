@@ -3,6 +3,7 @@ import { useAppStore } from '@/stores/appStore';
 import EventCard from '@/components/EventCard.vue';
 import { computed, ref } from 'vue';
 import EditConference from '@/components/EditConference.vue';
+import { yearMonthDay } from '@/lib';
 
 const appStore = useAppStore()
 
@@ -21,7 +22,7 @@ const editConference = ref(false)
   <main>
     <div v-if="conference">
       <div v-if="editConference">
-        <EditConference @close="editConference = false"/>
+        <EditConference @close="editConference = false" />
       </div>
       <div v-else>
 
@@ -36,6 +37,7 @@ const editConference = ref(false)
       </div>
     </div>
     <br>
+    <RouterLink :to="'/day/' + yearMonthDay(conference.fields.start.value)">First Day</RouterLink>
     <br>
     <h2>Events</h2>
     <div v-for="event of appStore.events" :key="event.id">

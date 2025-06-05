@@ -37,6 +37,7 @@ const description = computed(() => {
       Organized by <span v-if="event.fields.organizer.value">{{ event.fields.organizer.value }}</span><span v-else
         class="anonymous">Anonymous</span>
     </div>
+    <br v-if="!short">
     <p v-for="paragraph of description.split('\n')" :key="paragraph">
       {{ paragraph  }}
     </p>
