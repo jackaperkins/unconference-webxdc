@@ -11,7 +11,7 @@ const route = useRoute()
     <pre>https://github.com/jackaperkins</pre>
     <br>
     <p>
-      a b cd
+      Allow collaborative control over a schedule time.
     </p>
   </div>
 </template>

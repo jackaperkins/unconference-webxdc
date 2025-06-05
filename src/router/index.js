@@ -5,6 +5,7 @@ import NotFound from '@/views/NotFound.vue'
 import EventFocus from '@/views/EventFocus.vue'
 import SingleDay from '@/views/SingleDay.vue'
 import About from '@/views/About.vue'
+import EditConference from '@/components/EditConference.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,6 +25,14 @@ const router = createRouter({
         title:'Create Event'
       },
       component: CreateEvent
+    },
+    {
+      path: '/edit/conference',
+      name: 'editConference',
+      meta: {
+        title: 'Edit Conference'
+      },
+      component: EditConference
     },
     {
       path: '/event/:id',

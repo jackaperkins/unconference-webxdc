@@ -63,7 +63,7 @@ const disableSave = computed(() => {
           </div>
           <br>
           <div class="button-group">
-            <button @click.stop.prevent="emit('close')">Cancel</button>
+            <button @click.stop.prevent="router.push('/')">Cancel</button>
             <button :disabled="disableSave != null">Save</button>
           </div>
         </div>

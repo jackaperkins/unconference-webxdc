@@ -45,6 +45,11 @@ const showMenu = ref(false)
             Day Schedule
           </li>
           <li>
+            <RouterLink to="/edit/conference">
+              Edit Conference
+            </RouterLink>
+          </li>
+          <li>
             <RouterLink to="/about">
               About
             </RouterLink>

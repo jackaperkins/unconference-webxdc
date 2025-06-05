@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { yearMonthDay } from '@/lib';
 import { useAppStore } from '../stores/appStore';
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -30,10 +31,18 @@ const disableCreate = computed(() => {
 
   return null
 })
+
+const outsideConferenceTimes = computed(() => {
+  if (!appStore.conference) {
+    return true
+  }
+  return yearMonthDay(start.value) < yearMonthDay(appStore.conference.fields.start.value) || yearMonthDay(end.value) > yearMonthDay(appStore.conference.fields.end.value)
+})
+
 </script>
 <template>
   <main>
-    <div>
+    <div v-if="appStore.conference">
       <form @submit.prevent="createEvent">
         <div class="default-form">
           <label for="">Title*</label><br>
@@ -48,16 +57,31 @@ const disableCreate = computed(() => {
           <input type="datetime-local" v-model="end" required>
         </div>
         <br>
+        <div v-if="outsideConferenceTimes">
+          <p>
+            Event exists outside of conference start and end dates, Ok?
+          </p>
+          <p>
+            Conference: {{ yearMonthDay(appStore.conference.fields.start.value) }} - {{
+              yearMonthDay(appStore.conference.fields.end.value) }}
+          </p>
+        </div>
+        <div v-if="disableCreate" class="warning">
+          {{ disableCreate }}
+        </div>
+        <br>
         <button :disabled="disableCreate != null">Create</button>
       </form>
-      <div v-if="disableCreate">
-        {{ disableCreate }}
-      </div>
+
     </div>
   </main>
 </template>
 <style scoped>
 button {
   width: 100%;
+}
+
+.warning {
+  color: var(--color-warn);
 }
 </style>
