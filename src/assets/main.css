@@ -31,9 +31,6 @@ a,
 
 }
 
-img.svg-icon {
-  width: 24px;
-}
 
 .button-group {
   display: grid;
@@ -88,3 +85,4 @@ textarea {
 button.red {
   background-color: rgba(255, 0, 0, 0.2);
 }
+
