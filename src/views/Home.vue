@@ -8,7 +8,6 @@ import { yearMonthDay } from '@/lib';
 const appStore = useAppStore()
 
 const conference = computed(() => appStore.conference)
-
 const editConference = ref(false)
 
 </script>
@@ -25,15 +24,12 @@ const editConference = ref(false)
         <EditConference @close="editConference = false" />
       </div>
       <div v-else>
-
         <h3>{{ conference.fields.start.value }} - {{ conference.fields.end.value }}</h3>
         <p>
           {{ conference.fields.description.value }}
         </p>
         <button @click="editConference = true">Edit Conference</button>
         <br>
-        <br>
-        <RouterLink to="/create/event" class="link-button">Create Event +</RouterLink>
       </div>
     </div>
     <br>

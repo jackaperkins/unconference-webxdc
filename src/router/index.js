@@ -4,6 +4,7 @@ import CreateEvent from '@/components/CreateEvent.vue'
 import NotFound from '@/views/NotFound.vue'
 import EventFocus from '@/views/EventFocus.vue'
 import SingleDay from '@/views/SingleDay.vue'
+import About from '@/views/About.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +40,14 @@ const router = createRouter({
         title: 'Day'
       },
       component: SingleDay
+    },
+    {
+      path: '/about',
+      name: 'about',
+      meta: {
+        title: 'About'
+      },
+      component: About
     },
     {
       path: '/:pathMatch(.*)*',

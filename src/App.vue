@@ -3,11 +3,13 @@ import { RouterView } from 'vue-router'
 import { useAppStore } from './stores/appStore.js'
 import { useRoute } from 'vue-router'
 import CreateConference from './components/CreateConference.vue'
+import { ref } from 'vue'
 
 const route = useRoute()
 
 const appStore = useAppStore()
 
+const showMenu = ref(false)
 
 </script>
 
@@ -19,12 +21,36 @@ const appStore = useAppStore()
   <div v-else>
     <div class="nav-bar">
       <span>
-        <RouterLink :to="{name: 'home'}" v-if="route.name != 'home'">
-          <span  class="nav-button">Back</span>
+        <RouterLink :to="{ name: 'home' }" v-if="route.name != 'home'">
+          <span class="nav-button">Back</span>
         </RouterLink>
       </span>
       <span class="nav-title">{{ route.meta?.title || '' }}</span>
-      <span class="nav-menu"></span>
+      <span class="nav-menu">
+        <button @click="showMenu = !showMenu">
+          <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6H20M4 12H20M4 18H20" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+          </svg>
+        </button>
+      </span>
+      <div id="menu" v-if="showMenu" @click="showMenu = false">
+        <ul>
+          <li>
+            <RouterLink to="/create/event">
+              New Event
+            </RouterLink>
+          </li>
+          <li>
+            Day Schedule
+          </li>
+          <li>
+            <RouterLink to="/about">
+              About
+            </RouterLink>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="wrapper">
       <div v-if="appStore.conference">
@@ -104,19 +130,65 @@ nav a:first-of-type {
   padding: 3px 5px;
   color: var(--color-text);
   background-color: var(--color-background-mute);
-  display:grid;
+  display: grid;
   grid-template-columns: 60px 1fr 60px;
+  position: relative;
+  height: 32px;
 }
+
+.nav-menu {
+  text-align: right;
+}
+
+.nav-menu button {
+  padding: 0px 10px;
+  margin: 0px;
+  background: none;
+}
+
+.nav-menu svg {
+  stroke: var(--color-text);
+}
+
+#menu {
+  position: absolute;
+  top: 32px;
+  width: 100%;
+  right: 0px;
+  max-width: 400px;
+  background-color: var(--color-background-soft);
+}
+
+#menu ul {
+  list-style-type: none;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+}
+
+#menu li {
+  padding: 5px 10px;
+  margin: 0px;
+  width: 100%;
+}
+
+#menu a {
+  width: 100%;
+  display: inline-block;
+}
+
 
 .nav-title {
   text-align: center;
   font-weight: bolder;
   font-size: 18px;
 }
+
 .nav-button {
   font-size: 16px;
   padding: 0px 10px 0px 3px;
-  width:30px;
+  width: 30px;
   color: var(--color-heading);
 }
 

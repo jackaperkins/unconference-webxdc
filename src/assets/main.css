@@ -11,17 +11,10 @@
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  background-color: hsla(160, 100%, 37%, 0.1);
+  color: hsla(160, 100%, 45%, 1);
   padding: 3px;
 }
 
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
 
 @media (min-width: 1024px) {
   body {
