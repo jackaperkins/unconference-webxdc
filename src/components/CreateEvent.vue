@@ -10,8 +10,8 @@ const appStore = useAppStore()
 const title = ref('')
 const description = ref('')
 const organizer = ref('')
-const start = ref('2025-05-15T16:00')
-const end = ref('2025-05-15T20:00')
+const start = ref('')
+const end = ref('')
 
 function createEvent() {
   appStore.createEvent(
@@ -25,6 +25,9 @@ function createEvent() {
 }
 
 const disableCreate = computed(() => {
+  if(end.value === '' || start.value === '') {
+    return ''
+  }
   if (end.value <= start.value) {
     return "Start time must be before End"
   }

@@ -2,12 +2,13 @@
 
 The unconference format needs a webxdc calendar! Scheduling and advertizing various events in a permissionless way.
 
+![Example screenshot](example.jpg)
+
 **This project is mostly for me to learn p2p stuff like [CRDTs](https://mattweidner.com/2023/09/26/crdt-survey-1.html) and [webxdc](https://webxdc.org) basics.**
 
 ## Desired Features
-- Initiator defines a time range of one or more days. Define one or more 'tracks', think rooms at a physical conference where events can happen in parallel.
-- For each day+track combo anyone can create events in the form of a time range, a description and an owner field.
-- Decent UI for showing collisions in event times on the same track.
+- Initiator defines a time range of one or more days.
+- Anyone can create events in the form of a time range, title, description and an organizer field.
 - Probably calendar and list views, some decent way to show whats happening in parallel.
 
 Stretch goals:
@@ -70,8 +71,11 @@ Probably will use react or something for the frontend, maybe not and reloading t
 - [x] Wrap webxdc connection in vue store
 - [x] Core operation CRDTs
 - [x] Conference and Event types, operations
-- [ ] Event deletion
+- [x] Event deletion
+- [x] Day-by-day view
 - [ ] Add localstorage logic to appstore, resume update listening from last sequence 
-- [ ] Day-by-day view, deep links for chat from creation events
+
+Maybe suff
+- [ ]deep links for chat from creation events
 - [ ] Decide on themining and dump placeholder CSS
 - [ ] Attendence type, for marking interest in a specific event

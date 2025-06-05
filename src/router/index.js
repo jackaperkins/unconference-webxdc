@@ -19,6 +19,10 @@ const router = createRouter({
       component: Home,
     },
     {
+      path: '/index.html',
+      redirect: '/'
+    },
+    {
       path: '/create/event',
       name: 'createEvent',
       meta: {

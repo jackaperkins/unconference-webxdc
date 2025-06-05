@@ -22,7 +22,7 @@ const conference = computed(() => appStore.conference)
       <p>
         {{ conference.fields.description.value }}
       </p>
-      <RouterLink :to="'/day/' + yearMonthDay(conference.fields.start.value)">First Day</RouterLink>
+      <!-- <RouterLink :to="'/day/' + yearMonthDay(conference.fields.start.value)">First Day</RouterLink> -->
       <br>
       <br>
       <h2>Events</h2>

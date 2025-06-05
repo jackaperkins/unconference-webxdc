@@ -3,13 +3,21 @@ import { RouterView } from 'vue-router'
 import { useAppStore } from './stores/appStore.js'
 import { useRoute } from 'vue-router'
 import CreateConference from './components/CreateConference.vue'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { yearMonthDay } from '@/lib.js'
 
 const route = useRoute()
 
 const appStore = useAppStore()
 
 const showMenu = ref(false)
+
+const conferenceStartDay = computed(() => {
+  if (!appStore.conference){
+    return null
+  }
+  return yearMonthDay(appStore.conference.fields.start.value)
+})
 
 </script>
 
@@ -41,8 +49,10 @@ const showMenu = ref(false)
               New Event
             </RouterLink>
           </li>
-          <li>
-            Day Schedule
+          <li v-if="conferenceStartDay">
+            <RouterLink :to="'/day/' + conferenceStartDay">
+              Day-by-Day Schedule
+            </RouterLink>
           </li>
           <li>
             <RouterLink to="/edit/conference">

@@ -8,10 +8,15 @@ const route = useRoute()
   <div>
     <h2>Unconference webxdc</h2>
     <p>By Jack Perkins</p>
+    <pre>version 0.1</pre>
     <pre>https://github.com/jackaperkins</pre>
     <br>
     <p>
-      Allow collaborative control over a schedule time.
+      Collaborate and edit a shared unconference schedule together!
     </p>
+    <p>
+      Anyone can edit any event, there are no access controls or undo.
+    </p>
+    <p></p>
   </div>
 </template>
