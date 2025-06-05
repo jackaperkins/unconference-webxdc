@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { yearMonthDay } from '@/lib';
 import { useAppStore } from '../stores/appStore';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
