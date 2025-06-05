@@ -3,7 +3,7 @@ import { useAppStore } from '@/stores/appStore';
 import EventCard from '@/components/EventCard.vue';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { yearMonthDay, offsetDay, sameDay, eventOverlapsToday } from '../lib';
+import { yearMonthDay, offsetDay, sameDay, eventOverlapsToday, dayAndDayName } from '../lib';
 
 const route = useRoute()
 const appStore = useAppStore()
@@ -24,10 +24,7 @@ const events = computed(() => {
     return appStore.events.filter(event => eventOverlapsToday(todayDate.value, event))
 })
 
-function getDayName(theDate) {
-    const lang = navigator.language || navigator.languages[0];
-    return theDate.toLocaleString(lang, { weekday: 'long', day: 'numeric' })
-}
+
 </script>
 
 <template>

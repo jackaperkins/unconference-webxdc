@@ -23,7 +23,7 @@ export function yearMonthDay(d) {
 }
 
 export function sameDay(d1: Date, d2: Date) {
-   return d1.toDateString() === d2.toDateString()
+    return d1.toDateString() === d2.toDateString()
 }
 
 export function eventOverlapsToday(today: Date, event: Event) {
@@ -33,3 +33,22 @@ export function eventOverlapsToday(today: Date, event: Event) {
         return true
     }
 }
+
+export function dayAndDayName(date: string) {
+    const theDate = new Date(date)
+    const lang = navigator.language || navigator.languages[0];
+    const weekday = theDate.toLocaleString(lang, { weekday: 'long' })
+    const day = theDate.getDate()
+    return `${weekday} ${getOrdinalSuffix(day)}`
+
+}
+
+export function getOrdinalSuffix(n: number) {
+    if (n >= 11 && n <= 13) return `${n}th`;
+    switch (n % 10) {
+        case 1: return `${n}st`;
+        case 2: return `${n}nd`;
+        case 3: return `${n}rd`;
+        default: return `${n}th`;
+    }
+};

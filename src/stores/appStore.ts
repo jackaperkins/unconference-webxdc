@@ -115,7 +115,16 @@ export const useAppStore = defineStore('app', () => {
   }
 
   const events = computed(() => {
-    return data.filter(d => d.dataType === DataType.EVENT && d.state === AppDataState.EXISTS)
+    return data
+      .filter(d => d.dataType === DataType.EVENT && d.state === AppDataState.EXISTS)
+      .sort((a,b) => {
+        if (a.fields.start.value < b.fields.start.value) {
+          return -1
+        } else if (a.fields.start.value > b.fields.start.value) {
+          return 1
+        }
+        return 0
+      })
   })
 
   const eventFromRouter = computed(() => {

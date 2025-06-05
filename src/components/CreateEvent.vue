@@ -47,6 +47,7 @@ const disableCreate = computed(() => {
           <label for="">End*</label><br>
           <input type="datetime-local" v-model="end" required>
         </div>
+        <br>
         <button :disabled="disableCreate != null">Create</button>
       </form>
       <div v-if="disableCreate">
@@ -55,3 +56,8 @@ const disableCreate = computed(() => {
     </div>
   </main>
 </template>
+<style scoped>
+button {
+  width: 100%;
+}
+</style>

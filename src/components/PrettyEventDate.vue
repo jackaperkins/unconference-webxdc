@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { dayAndDayName } from '../lib.ts';
 
 const props = defineProps({
   start: {
@@ -17,15 +18,7 @@ const daysOfWeek = [
   'Thu', 'Fri', 'Saty'
 ];
 
-const getOrdinalSuffix = (n: number) => {
-  if (n >= 11 && n <= 13) return `${n}th`;
-  switch (n % 10) {
-    case 1: return `${n}st`;
-    case 2: return `${n}nd`;
-    case 3: return `${n}rd`;
-    default: return `${n}th`;
-  }
-};
+
 
 const multiDay = computed(() => {
   const start = new Date(props.start)
@@ -37,6 +30,7 @@ const multiDay = computed(() => {
 
   return false
 })
+
 
 function formatDate(theDate: string) {
   const lang = navigator.language || navigator.languages[0];
@@ -62,6 +56,6 @@ function formatDate(theDate: string) {
 </script>
 <template>
   <div>
-    {{ formatDate(start) }} - {{ formatDate(end) }}
+    {{ formatDate(start) }} - {{ formatDate(end) }}<span v-if="!multiDay">, {{ dayAndDayName(start) }}</span>
   </div>
 </template>

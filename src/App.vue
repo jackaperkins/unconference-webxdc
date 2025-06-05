@@ -1,32 +1,13 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import { useAppStore } from './stores/appStore.js'
-import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import CreateConference from './components/CreateConference.vue'
 
 const route = useRoute()
 
 const appStore = useAppStore()
 
-const confTitle = ref('My Conference')
-const confDescription = ref('An unconference for everyone')
-const confStart = ref('2025-05-10')
-const confEnd = ref('2025-05-20')
-
-function createConference() {
-  appStore.createConference(confTitle.value, confDescription.value, confStart.value.toString(), confEnd.value.toString())
-}
-
-const disableCreate = computed(() => {
-  if (!confTitle.value || !confDescription.value || !confStart.value || !confEnd.value) {
-    return true
-  }
-
-  if (confEnd.value <= confStart.value) {
-    return true
-  }
-  return false
-})
 
 </script>
 
@@ -38,8 +19,8 @@ const disableCreate = computed(() => {
   <div v-else>
     <div class="nav-bar">
       <span>
-        <RouterLink :to="{name: 'home'}">
-          <span  class="nav-button" v-if="route.name != 'home'">Back</span>
+        <RouterLink :to="{name: 'home'}" v-if="route.name != 'home'">
+          <span  class="nav-button">Back</span>
         </RouterLink>
       </span>
       <span class="nav-title">{{ route.meta?.title || '' }}</span>
@@ -50,20 +31,7 @@ const disableCreate = computed(() => {
         <RouterView />
       </div>
       <div v-else>
-        <h2>New Conference</h2>
-        <form @submit.prevent="createConference">
-          <div class="default-form">
-            <label for="">Title</label><br>
-            <input v-model="confTitle"><br>
-            <label for="">Description</label><br>
-            <input v-model="confDescription"><br>
-            <label for="">Start</label><br>
-            <input type="date" v-model="confStart"><br>
-            <label for="">End</label><br>
-            <input type="date" v-model="confEnd">
-          </div>
-          <button :disabled="disableCreate">Create</button>
-        </form>
+        <CreateConference />
       </div>
       <br>
       <br>
@@ -72,7 +40,7 @@ const disableCreate = computed(() => {
         <div class="debug-reveal" @click="appStore.showDebug(false)">Hide Debug</div>
         <h3>Updates DB:</h3>
         <div v-for="update of appStore.updates" :key="update.sequence" style="margin-bottom: 10px;">
-          {{ update }}
+          <pre>{{ JSON.stringify(update, null, 2) }}</pre>
         </div>
       </div>
       <div v-else class="debug-reveal" @click="appStore.showDebug(true)">Debug View</div>
