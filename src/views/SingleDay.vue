@@ -65,12 +65,12 @@ const events = computed(() => {
                 <p>
                     Date outside of conference start and end.
                 </p>
-                <br>
                 <p>
-                    Go to <RouterLink :to="'/day/' + yearMonthDay(conference.fields.start.value)">First Day</RouterLink>
+                    Go to the <RouterLink :to="'/day/' + yearMonthDay(conference.fields.start.value)">First Day</RouterLink>
                 </p>
+                <br>
             </div>
-            <div v-else>
+            <div>
                 <div v-for="event of events" :key="event.id">
                     <EventCard :event="event" :short="true"></EventCard>
                 </div>

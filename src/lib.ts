@@ -27,9 +27,13 @@ export function sameDay(d1: Date, d2: Date) {
 }
 
 export function eventOverlapsToday(today: Date, event: Event) {
-    const start = new Date(event.fields.start.value)
-    const end = new Date(event.fields.end.value)
-    if (sameDay(start, today) || sameDay(end, today)) {
+    const start = yearMonthDay(new Date(event.fields.start.value)) || ''
+    const end = yearMonthDay(new Date(event.fields.end.value)) || ''
+    const todayDay = yearMonthDay(today) || ''
+    if (
+        start <= todayDay && todayDay <= end ||
+        start == todayDay
+    ) {
         return true
     }
 }

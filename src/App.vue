@@ -13,7 +13,7 @@ const appStore = useAppStore()
 const showMenu = ref(false)
 
 const conferenceStartDay = computed(() => {
-  if (!appStore.conference){
+  if (!appStore.conference) {
     return null
   }
   return yearMonthDay(appStore.conference.fields.start.value)
@@ -37,21 +37,20 @@ const conferenceStartDay = computed(() => {
       <span class="nav-menu">
         <button @click="showMenu = !showMenu">
           <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 6H20M4 12H20M4 18H20" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" />
+            <path d="M4 6H20M4 12H20M4 18H20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
       </span>
       <div id="menu" v-if="showMenu" @click="showMenu = false">
         <ul>
-          <li>
-            <RouterLink to="/create/event">
-              New Event
-            </RouterLink>
-          </li>
           <li v-if="conferenceStartDay">
             <RouterLink :to="'/day/' + conferenceStartDay">
               Day-by-Day Schedule
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/create/event">
+              New Event
             </RouterLink>
           </li>
           <li>
